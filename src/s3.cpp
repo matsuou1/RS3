@@ -51,7 +51,7 @@ int S3_init() {
         Rcout << "\nFailed to initialize\n";
         return 0;
     }
-    Rcout << "\ninitialized correctly\n";
+//    Rcout << "\ninitialized correctly\n";
 }
 
 static void printError() {
@@ -59,7 +59,7 @@ static void printError() {
         Rcout << S3_get_status_name(statusG);
     }
     else {
-        Rcout << S3_get_status_name(statusG);
+        Rcout << S3_get_status_name(statusG) << "\n";
         Rcout << errorDetailsG;
     }
 }
