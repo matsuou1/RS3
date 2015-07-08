@@ -378,7 +378,7 @@ void test_bucket(const char* bucketName) {
     char locationConstraint[64];
     do {
         S3_test_bucket(protocolG, uriStyleG, accessKeyIdG, secretAccessKeyG,
-                0, bucketName, sizeof(locationConstraint),
+                hostG, bucketName, sizeof(locationConstraint),
                 locationConstraint, 0, &responseHandler, 0);
     } while (S3_status_is_retryable(statusG) && should_retry());
 
