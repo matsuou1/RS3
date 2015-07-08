@@ -362,6 +362,29 @@ static void responseCompleteCallback(S3Status status, const S3ErrorDetails *erro
 
     int len = 0;
 
+    if (error && error->message) {
+        len += snprintf(&(errorDetailsG[len]), sizeof(errorDetailsG) - len,
+                        "  Message: %s\n", error->message);
+    }
+    if (error && error->resource) {
+        len += snprintf(&(errorDetailsG[len]), sizeof(errorDetailsG) - len,
+                        "  Resource: %s\n", error->resource);
+    }
+    if (error && error->furtherDetails) {
+        len += snprintf(&(errorDetailsG[len]), sizeof(errorDetailsG) - len,
+                        "  Further Details: %s\n", error->furtherDetails);
+    }
+    if (error && error->extraDetailsCount) {
+        len += snprintf(&(errorDetailsG[len]), sizeof(errorDetailsG) - len,
+                        "%s", "  Extra Details:\n");
+        int i;
+        for (i = 0; i < error->extraDetailsCount; i++) {
+            len += snprintf(&(errorDetailsG[len]),
+                            sizeof(errorDetailsG) - len, "    %s: %s\n",
+                            error->extraDetails[i].name,
+                            error->extraDetails[i].value);
+        }
+    }
 }
 
 // [[Rcpp::export(S3_test_bucket)]]
